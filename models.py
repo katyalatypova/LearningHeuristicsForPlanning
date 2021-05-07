@@ -155,6 +155,5 @@ def piece_loss(output, target_map, minimal_cost, alpha1=2, alpha2=10):
 
 def loss(output, target_map, minimal_cost, device, alpha, alpha1, alpha2,
          valid_actions=('n', 's', 'e', 'w', 'nw', 'ne', 'sw', 'se')):
-    # global device, alpha, alpha1, alpha2
     return alpha * gradient_loss(output, target_map, device, valid_actions) + piece_loss(output, target_map,
                                                                                          minimal_cost, alpha1, alpha2)

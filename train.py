@@ -9,6 +9,9 @@ from multiprocessing import cpu_count
 
 
 def main():
+    SEED = 42
+    torch.manual_seed(SEED)
+
     parser = argparse.ArgumentParser()
 
     ## Required parameters
