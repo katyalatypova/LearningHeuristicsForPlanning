@@ -70,7 +70,7 @@ def get_stats_for_map_by_net(val_gen, net, device):
             except Exception as e:
                 print("Execution error")
                 print(e)
-        return stat
+    return stat
 
 
 def main():
@@ -106,10 +106,9 @@ def main():
     else:
         raise (ValueError, 'Model type should be in [small, big]')
 
-    dct = torch.load(args.checkpoint_path)['model_state_dict']
-    model.load_state_dict(dct)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model.to(device)
+    dct = torch.load(args.checkpoint_path, map_location=device)['model_state_dict']
+    model.load_state_dict(dct)
 
     MAP_DIR = args.map_dir
     HEURISTIC_DIR = args.heuristic_dir
