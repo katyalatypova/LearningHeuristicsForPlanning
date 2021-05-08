@@ -86,7 +86,8 @@ def train_net(
         device,
         num_epochs=5,
         output_dir='./results',
-        desired_batch_size=16
+        desired_batch_size=16,
+        exp_name=''
 ):
     '''
     Функция для обучения модели и вывода лосса и метрики во время обучения.
@@ -104,7 +105,7 @@ def train_net(
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
 
-    LOGFILE = os.path.join(output_dir, 'info.txt')
+    LOGFILE = os.path.join(output_dir, f'info_{exp_name}.txt')
     history = defaultdict(lambda: defaultdict(list))
     model.to(device)
 

@@ -109,6 +109,7 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     dct = torch.load(args.checkpoint_path, map_location=device)['model_state_dict']
     model.load_state_dict(dct)
+    model.to(device)
 
     MAP_DIR = args.map_dir
     HEURISTIC_DIR = args.heuristic_dir
@@ -133,8 +134,6 @@ def main():
         val_dataset, batch_size=1, shuffle=True,
         pin_memory=True, num_workers=2
     )
-
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     train_stat = get_stats_for_map_by_net(train_batch_gen, model, device)
     train_stat_path = os.path.join(output_dir, 'train_stat.json')

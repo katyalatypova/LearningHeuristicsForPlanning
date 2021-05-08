@@ -1,10 +1,11 @@
 import argparse
 import torch
 import json
+import os
 
 from models import SmallUNet, UNet, loss
 from utils import MapsDataset, train_net
-from torch.utils.data import Dataset, random_split, DataLoader
+from torch.utils.data import random_split, DataLoader
 from multiprocessing import cpu_count
 
 
@@ -63,6 +64,8 @@ def main():
                                                               alpha2)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+    exp_name = f'alpha_{alpha}_alpha1_{alpha1}_alpha2_{alpha2}'
+
     MAP_DIR = args.map_dir
     HEURISTIC_DIR = args.heuristic_dir
     GOAL_DIR = args.goal_dir
@@ -75,6 +78,15 @@ def main():
     batch_size = args.batch_size
     num_epochs = args.num_train_epochs
     desired_batch_size = args.desired_batch_size if args.desired_batch_size > batch_size else batch_size
+
+    config = {'learning_rate': learning_rate, 'alpha': alpha, 'alpha1': alpha1, 'alpha2': alpha2,
+              'num_epochs': num_epochs, 'batch_size': batch_size, 'desired_batch_size': desired_batch_size}
+
+    if not os.path.exists(output_dir):
+        os.mkdir(output_dir)
+
+    with open(os.path.join(output_dir, 'config.json'), 'w') as file:
+        json.dump(config, file)
 
     dataset = MapsDataset(MAP_DIR, HEURISTIC_DIR, GOAL_DIR, map2heuristic, maps_size=(64, 64))
     train_dataset, val_dataset = random_split(dataset, [40000, 10000])
@@ -96,7 +108,8 @@ def main():
         device,
         num_epochs=num_epochs,
         output_dir=output_dir,
-        desired_batch_size=desired_batch_size
+        desired_batch_size=desired_batch_size,
+        exp_name=exp_name
     )
 
 
