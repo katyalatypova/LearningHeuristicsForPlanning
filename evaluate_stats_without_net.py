@@ -70,7 +70,7 @@ def get_stats_for_map_with_different_heuristics(val_gen, max_size=5000, heuristi
             except Exception as e:
                 print("Execution error")
                 print(e)
-        return stat
+    return stat
 
 
 def main():
