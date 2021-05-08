@@ -42,6 +42,8 @@ def get_stats_for_map_with_different_heuristics(val_gen, max_size=5000, heuristi
         iGoal, jGoal = np.unravel_index(np.argmax(goal.squeeze(0).numpy()), (64, 64))
         starts = generate_starts(map, 100)
 
+        print(f'\nStarted {i + 1} / {len(val_gen)} map\n')
+
         for iStart, jStart in starts:
             try:
                 result = AStar(MAP, iStart, jStart, iGoal, jGoal, heuristicFunction=heuristic_function)
