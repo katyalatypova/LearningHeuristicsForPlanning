@@ -129,17 +129,15 @@ def main():
         pin_memory=True, num_workers=2
     )
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
     train_stat = get_stats_for_map_with_different_heuristics(train_batch_gen, args.max_size, heurictic_function)
     train_stat_path = os.path.join(output_dir, 'train_stat.json')
     with open(train_stat_path, 'w') as file:
-        json.dump(train_stat_path, file)
+        json.dump(train_stat, file)
 
     val_stat = get_stats_for_map_with_different_heuristics(val_batch_gen, args.max_size, heurictic_function)
     val_stat_path = os.path.join(output_dir, 'val_stat.json')
     with open(val_stat_path, 'w') as file:
-        json.dump(train_stat_path, file)
+        json.dump(val_stat, file)
 
 
 if __name__ == "__main__":
