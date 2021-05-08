@@ -53,10 +53,10 @@ class Map:
         return not self.cells[i][j]
 
     # Get a list of neighbouring cells as (i,j) tuples.
-    # It's assumed that grid is 4-connected (i.e. only moves into cardinal directions are allowed)
+    # It's assumed that grid is 8-connected (i.e. not only moves into cardinal directions are allowed, but also diagonal ones)
     def GetNeighbors(self, i, j):
         neighbors = []
-        delta = [[0, 1], [1, 0], [0, -1], [-1, 0]]
+        delta = [[0, 1], [1, 0], [0, -1], [-1, 0], [1, 1], [1, -1], [-1, 1], [-1, -1]]
 
         for d in delta:
             if self.inBounds(i + d[0], j + d[1]) and self.Traversable(i + d[0], j + d[1]):

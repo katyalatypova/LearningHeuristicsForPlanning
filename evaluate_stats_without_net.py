@@ -5,10 +5,8 @@ import os
 import torch
 
 from collections import defaultdict
-from tqdm.notebook import tqdm
-from torch.utils.data import Dataset, random_split, DataLoader
+from torch.utils.data import random_split, DataLoader
 
-from models import SmallUNet, UNet
 from utils import MapsDataset
 from astar import ManhattanDistance, AStar, MakePath, Map
 
