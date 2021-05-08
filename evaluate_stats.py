@@ -149,7 +149,7 @@ def main():
         json.dump(train_stat, file)
 
     val_stat = get_stats_for_map_by_net(val_batch_gen, model, device, args.max_size)
-    val_stat_path = os.path.join(output_dir, 'train_stat.json')
+    val_stat_path = os.path.join(output_dir, 'val_stat.json')
     with open(val_stat_path, 'w') as file:
         json.dump(val_stat, file)
 
