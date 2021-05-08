@@ -24,7 +24,8 @@ def generate_starts(map, n_starts):
 
 def get_stats_for_map_by_net(val_gen, net, device):
     stat = defaultdict(list)
-    for map, heuristic, goal, minimal_cost in tqdm(val_gen):
+    for i, (map, heuristic, goal, minimal_cost) in enumerate(val_gen):
+        print(f'Started {i + 1} / {len(val_gen)} map')
         input_ = torch.cat([map, goal], dim=1).float().to(device)
         pred_heuristic = net(input_).squeeze(0).squeeze(0).detach().cpu().numpy()
         heuristic = heuristic.squeeze(0).squeeze(0).numpy()
