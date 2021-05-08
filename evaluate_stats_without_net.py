@@ -8,7 +8,7 @@ from collections import defaultdict
 from torch.utils.data import random_split, DataLoader
 
 from utils import MapsDataset
-from astar import ManhattanDistance, AStar, MakePath, Map
+from astar import ManhattanDistance, DiagonalDistance, ChebyshevDistance, EuclidDistance, AStar, MakePath, Map
 
 EPS = 1e-5
 
@@ -108,6 +108,12 @@ def main():
     # TO DO
     if args.heuristic_type == 'manhattan':
         heurictic_function = ManhattanDistance
+    elif args.heuristic_type == 'diagonal':
+        heurictic_function = DiagonalDistance
+    elif args.heuristic_type == 'euclid':
+        heurictic_function = EuclidDistance
+    elif args.heuristic_type == 'chebyshev':
+        heurictic_function = ChebyshevDistance
     else:
         raise NotImplementedError
 

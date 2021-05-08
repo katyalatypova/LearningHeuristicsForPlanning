@@ -155,6 +155,24 @@ def ManhattanDistance(i1, j1, i2, j2):
     return abs(i1 - i2) + abs(j1 - j2)
 
 
+def DiagonalDistance(i1, j1, i2, j2):
+    dx = abs(i1 - i2)
+    dy = abs(j1 - j2)
+    return abs(dx - dy) + min(dx, dy)
+
+
+def ChebyshevDistance(i1, j1, i2, j2):
+    dx = abs(i1 - i2)
+    dy = abs(j1 - j2)
+    return max(dx, dy)
+
+
+def EuclidDistance(i1, j1, i2, j2):
+    dx = i1 - i2
+    dy = j1 - j2
+    return math.sqrt(dx ** 2 + dy ** 2)
+
+
 def CalculateCost(i1, j1, i2, j2):
     return math.sqrt((i1 - i2) ** 2 + (j1 - j2) ** 2)
 
