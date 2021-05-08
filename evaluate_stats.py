@@ -22,10 +22,15 @@ def generate_starts(map, n_starts):
     return coords[idxs]
 
 
-def get_stats_for_map_by_net(val_gen, net, device):
+def get_stats_for_map_by_net(val_gen, net, device, max_size=5000):
     stat = defaultdict(list)
     for i, (map, heuristic, goal, minimal_cost) in enumerate(val_gen):
-        print(f'Started {i + 1} / {len(val_gen)} map')
+
+        if i + 1 > max_size:
+            print('The maximum amount of elements is seen. Breaking evaluation')
+            break
+
+        print(f'\nStarted {i + 1} / {len(val_gen)} map\n')
         input_ = torch.cat([map, goal], dim=1).float().to(device)
         pred_heuristic = net(input_).squeeze(0).squeeze(0).detach().cpu().numpy()
         heuristic = heuristic.squeeze(0).squeeze(0).numpy()
@@ -97,6 +102,8 @@ def main():
                         help="Checkpoint of pretrained_model.")
     parser.add_argument("--output_dir", default=None, type=str, required=True,
                         help="The output directory where the model checkpoints and predictions will be written.")
+    parser.add_argument("--max_size", default=5000, type=int,
+                        help="The maximum number of elements in the dataset that will be considered")
 
     args = parser.parse_args()
 
@@ -136,12 +143,12 @@ def main():
         pin_memory=True, num_workers=2
     )
 
-    train_stat = get_stats_for_map_by_net(train_batch_gen, model, device)
+    train_stat = get_stats_for_map_by_net(train_batch_gen, model, device, args.max_size)
     train_stat_path = os.path.join(output_dir, 'train_stat.json')
     with open(train_stat_path, 'w') as file:
         json.dump(train_stat, file)
 
-    val_stat = get_stats_for_map_by_net(val_batch_gen, model, device)
+    val_stat = get_stats_for_map_by_net(val_batch_gen, model, device, args.max_size)
     val_stat_path = os.path.join(output_dir, 'train_stat.json')
     with open(val_stat_path, 'w') as file:
         json.dump(val_stat, file)
