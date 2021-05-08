@@ -137,7 +137,7 @@ def main():
         json.dump(train_stat_path, file)
 
     val_stat = get_stats_for_map_with_different_heuristics(val_batch_gen, args.max_size, heurictic_function)
-    val_stat_path = os.path.join(output_dir, 'train_stat.json')
+    val_stat_path = os.path.join(output_dir, 'val_stat.json')
     with open(val_stat_path, 'w') as file:
         json.dump(train_stat_path, file)
 
