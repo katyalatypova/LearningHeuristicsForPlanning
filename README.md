@@ -1,6 +1,7 @@
 # LearningHeuristicsForPlanning
 
-Этот проект выполнен в рамках курса "Эвристические методы планирования" в МФТИ на основе статьи [Learning Heuristic Functions for Mobile Robot Path Planning Using Deep Neural Networks](https://ojs.aaai.org/index.php/ICAPS/article/view/3545/3413).
+Этот проект выполнен Латыповой Екатериной (latypova.ea@phystech.edu) и 
+Шарыпиной Дарьей (sharypina.dv@phystech.edu) в рамках курса "Эвристические методы планирования" в МФТИ на основе статьи [Learning Heuristic Functions for Mobile Robot Path Planning Using Deep Neural Networks](https://ojs.aaai.org/index.php/ICAPS/article/view/3545/3413).
 
 # Содержание
 1. [Мотивация](#introduction)
@@ -14,7 +15,7 @@
 ## Мотивация исследования <a name="introduction"></a>
 Для алгоритмов эвристического поиска важно, насколько хорошо используемая эвристическая функция аппроксимирует истинную стоимость пути до целевой точки. 
 Главной задачей является получение эвристической функции, минимизирующей стоимость поиска.
-Интересно проверить, можно ли для карты сгенерировать эвристику, которая минимизирует стоимость поиска.
+Интересно проверить, можно ли для данной карты сгенерировать эвристику, которая минимизирует стоимость поиска.
 
 ## Метод исследования <a name="paragraph1"></a>
 
