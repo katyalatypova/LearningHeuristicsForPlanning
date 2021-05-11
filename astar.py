@@ -56,7 +56,7 @@ class Map:
     # It's assumed that grid is 8-connected (i.e. not only moves into cardinal directions are allowed, but also diagonal ones)
     def GetNeighbors(self, i, j):
         neighbors = []
-        delta = [[0, 1], [1, 0], [0, -1], [-1, 0], [1, 1], [1, -1], [-1, 1], [-1, -1]]
+        delta = [[0, 1], [1, 0], [0, -1], [-1, 0]]
 
         for d in delta:
             if self.inBounds(i + d[0], j + d[1]) and self.Traversable(i + d[0], j + d[1]):
